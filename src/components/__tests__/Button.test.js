@@ -30,7 +30,7 @@ it.skip("renders a danger button", () => {
   expect(getByText("Danger")).toHaveClass("button--danger");
 });
 
-it.skip("renders a clickable button", () => {
+it ("renders a clickable button", () => {
   const handleClick = jest.fn();
   const { getByText } = render(
     <Button onClick={handleClick}>Clickable</Button>
@@ -43,7 +43,7 @@ it.skip("renders a clickable button", () => {
   expect(handleClick).toHaveBeenCalledTimes(1);
 });
 
-it.skip("renders a disabled button", () => {
+it ("renders a disabled button", () => {
   const handleClick = jest.fn();
   const { getByText } = render(
     <Button disabled onClick={handleClick}>
