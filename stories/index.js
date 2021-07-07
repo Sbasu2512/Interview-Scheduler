@@ -101,13 +101,14 @@ storiesOf("Button", module)
         />
       ))
       .add("Clickable", () => (
-    <InterviewerListItem
-      id={interviewer.id}
-      name={interviewer.name}
-      avatar={interviewer.avatar}
-      setInterviewer={ (event)=>  action("setInterviewer") (interviewer.id)}
-    />
-  )); 
+        <InterviewerListItem
+          id={interviewer.id}
+          name={interviewer.name}
+          avatar={interviewer.avatar}
+          setInterviewer={event => action("setInterviewer")(interviewer.id)}
+        />
+      ));
+      
 
   const interviewers = [
     { id: 1, name: "Sylvia Palmer", avatar: "https://i.imgur.com/LpaY82x.png" },
@@ -124,13 +125,13 @@ storiesOf("Button", module)
     .add("Initial", () => (
       <InterviewerList
         interviewers={interviewers}
-        setInterviewer={action("setInterviewer")}
+        setInterviewer={action("onChange")}
       />
     ))
     .add("Preselected", () => (
       <InterviewerList
         interviewers={interviewers}
         interviewer={3}
-        setInterviewer={action("setInterviewer")}
+        setInterviewer={action("onChange")}
       />
     ));
