@@ -6,7 +6,7 @@ const classname = require('classnames');
 
 
 export default function Button(props) {
-   console.log("---------PROPS-----------", props);
+  //  console.log("---------PROPS-----------", props);
 
    let buttonClass = classname("button", {
     "button--confirm": props.confirm,
