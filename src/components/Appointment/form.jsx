@@ -5,7 +5,7 @@ import InterviewerList from "components/InterviewerList.jsx";
 
 export default function Form(props) {
 
-  // console.log(props);
+  console.log(props);
   const [name,setName] = useState(props.value || null)
   const [interviewer, setInterviewer] = useState(props.value || null);
   
