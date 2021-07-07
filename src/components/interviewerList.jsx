@@ -1,13 +1,14 @@
 
 import React from "react";
 import InterviewerListItem from "./InterviewerListItem";
+import "components/InterviewerList.scss"
 
 export default function interviewerList(props) {
   // console.log(props);
   
    const Interviewers = 
    Array.isArray(props.interviewers) && 
-   props.interviewers.map((data, index) => {
+   props.interviewers.map(function(data, index) {
      return (<InterviewerListItem
       key={data.id}
       name = {data.name}
