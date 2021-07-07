@@ -1,5 +1,7 @@
 // package imports 
 import React, { useState } from "react";
+import { Fragment } from 'react'
+
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 
@@ -133,14 +135,14 @@ storiesOf("Button", module)
     .add("Initial", () => (
       <InterviewerList
         interviewers={interviewers}
-        setInterviewer={action("onChange")}
+        onChange={action("onChange")}
       />
     ))
     .add("Preselected", () => (
       <InterviewerList
         interviewers={interviewers}
-        interviewer={3}
-        setInterviewer={action("onChange")}
+        value={3}
+        onChange={action("onChange")}
       />
     ));
 
@@ -189,4 +191,10 @@ storiesOf("Button", module)
           onSave={action("onSave")}
           onCancel={action("onCancel")}
         />
+      ))
+      .add("Appointment Empty", () => (
+        <Fragment>
+          <Appointment id={1} time="12pm" />
+          <Appointment id="last" time="1pm" />
+        </Fragment>
       ));
