@@ -1,5 +1,5 @@
 // package imports 
-import React from "react";
+import React, { useState } from "react";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 
@@ -145,25 +145,48 @@ storiesOf("Button", module)
     ));
 
     storiesOf("Appointment", module)
-.addParameters({
-    backgrounds: [{ name: "white", value: "#fff", default: true }]
-  })
-  .add("Appointment", () => <Appointment />)
-  .add("Appointment with time", () => <Appointment
-  time = "12.00" />)
-  .add("Header", () => <Header time = "12pm" /> )
-  .add("Empty", () => <Empty onAdd={action("onAdd")} />)
-  .add("Show", () => <Show student="Lydia Miller-Jones" interviewer={interviewer} onEdit={action("onEdit")} onDelete={action("onDelete")} />) 
-  .add("Confirm", ()=> <Confirm message="Delete the appointment?" onConfirm={action("onConfirm")} onCancel={action("onCancel")} />)
-  .add("status", () => <Status message="Deleting" />)
-  .add("Error", () => <Error message="Could not Delete Appointment" onClose={action("onClose")} />)
-  .add("Edit", () => 
-  <Form name="name" 
-  interviewers={interviewers} 
-  interviewer={3} 
-  onSave={action("onSave")} 
-  onCancel={action("onCancel")}  />)
-  .add("Create Form", ()=> 
-  <Form interviewers={interviewers} 
-  onSave={action("onSave")} 
-  onCancel={action("onCancel")} /> )
+      .addParameters({
+        backgrounds: [{ name: "white", value: "#fff", default: true }],
+      })
+      .add("Appointment", () => <Appointment />)
+      .add("Appointment with time", () => <Appointment time="12.00" />)
+      .add("Header", () => <Header time="12pm" />)
+      .add("Empty", () => <Empty onAdd={action("onAdd")} />)
+      .add("Show", () => (
+        <Show
+          student="Lydia Miller-Jones"
+          interviewer={interviewer}
+          onEdit={action("onEdit")}
+          onDelete={action("onDelete")}
+        />
+      ))
+      .add("Confirm", () => (
+        <Confirm
+          message="Delete the appointment?"
+          onConfirm={action("onConfirm")}
+          onCancel={action("onCancel")}
+        />
+      ))
+      .add("status", () => <Status message="Deleting" />)
+      .add("Error", () => (
+        <Error
+          message="Could not Delete Appointment"
+          onClose={action("onClose")}
+        />
+      ))
+      .add("Edit", () => (
+        <Form
+          name="Lydia Millier Jones"
+          interviewers={interviewers}
+          interviewer={3}
+          onSave={action("onSave")}
+          onCancel={action("onCancel")}
+        />
+      ))
+      .add("Create Form", () => (
+        <Form
+          interviewers={interviewers}
+          onSave={action("onSave")}
+          onCancel={action("onCancel")}
+        />
+      ));
