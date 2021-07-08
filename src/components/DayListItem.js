@@ -13,7 +13,7 @@ const formatSpots = function(spots) {
 
 
 export default function DayListItem(props) {
-  // console.log(props);
+  // console.log(props.selected);
 
   let listClass = className('day-list__item', {
     "day-list__item--selected": props.selected,
