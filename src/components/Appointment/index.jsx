@@ -12,7 +12,7 @@ import Show from "components/Appointment/show";
 
 export default function Appointment(props) {
 
-  console.log(props);
+  // console.log(props);
 
   return (
     <article className="appointment">

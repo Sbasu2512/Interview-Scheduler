@@ -5,10 +5,6 @@ import DayList     from "./daylist";
 import Appointment from "./Appointment";
 const axios = require('axios');
 
-
-
-
-
 const appointments = [
   {
     id: 1,
@@ -27,7 +23,7 @@ const appointments = [
     }
   },
   {
-    id: 2,
+    id: 21,
     time: "1pm",
   },
   {
@@ -43,11 +39,11 @@ const appointments = [
     }
   },
   {
-    id: 1,
+    id: 31,
     time: "2pm",
   },
   {
-    id: 2,
+    id: 27,
     time: "3pm",
     interview: {
       student: " ",
@@ -61,24 +57,34 @@ const appointments = [
 ];
 
 export default function Application(props) {
-  const [days, setDays] = useState([]);
-  
-  const [day, setDay] = useState("Monday");
+  const [state, setState] = useState({
+    day: "Monday",
+    days: [],
+    appointments: {}
+  });
   // console.log(props);
-  
+  // const setDay =  day => setState({ ...state, day });
+
+  const setDays = function (days) {
+    setState(prev => ({ ...prev, days }));
+
+}
+
   useEffect(() => {
-    //axios request here...
-    console.log("This is useEffect")
-    
     axios.get('/api/days').then((res) => {
-      console.log(res.data);
+      setDays(res.data); //  setDay(res.data)
+
+    }).catch((err) => {
+      console.log("Axios Error ___________",err.message);
     })
     
-  }, [])
+  }, []);
   
+
+
   const listOfAppointments = Object.values(appointments);
   
-  console.log(listOfAppointments);
+  // console.log(listOfAppointments);
   
   const parsed = Array.isArray(listOfAppointments) && listOfAppointments
   .map(appointment => <Appointment key={appointment.id} {...appointment} />
@@ -95,9 +101,9 @@ export default function Application(props) {
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
           <DayList                    //props  
-            days={days}
-            day={"Monday"}
-            setDay={setDay}
+            days={state.days}
+            day={state.day}
+            setDay={setState}
             
           />
         </nav>
