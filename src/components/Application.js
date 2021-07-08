@@ -3,10 +3,9 @@ import  { useState, useEffect } from "react";
 import "components/Application.scss";
 import DayList     from "./daylist";
 import Appointment from "./Appointment";
-
 const axios = require('axios');
 
-const [days, setDays] = useState([]);
+
 
 
 
@@ -62,24 +61,25 @@ const appointments = [
 ];
 
 export default function Application(props) {
-  console.log(props);
-
+  const [days, setDays] = useState([]);
+  
   const [day, setDay] = useState("Monday");
-
+  // console.log(props);
+  
   useEffect(() => {
     //axios request here...
     console.log("This is useEffect")
-
+    
     axios.get('/api/days').then((res) => {
-      console.log(res);
+      console.log(res.data);
     })
-
-}, [day])
-
+    
+  }, [])
+  
   const listOfAppointments = Object.values(appointments);
-
+  
   console.log(listOfAppointments);
-
+  
   const parsed = Array.isArray(listOfAppointments) && listOfAppointments
   .map(appointment => <Appointment key={appointment.id} {...appointment} />
     )
