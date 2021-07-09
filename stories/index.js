@@ -151,7 +151,7 @@ storiesOf("Button", module)
         backgrounds: [{ name: "white", value: "#fff", default: true }],
       })
       .add("Appointment", () => <Appointment />)
-      .add("Appointment with time", () => <Appointment time="12.00" />)
+      .add("Appointment with time", () => <Appointment time="12pm" />)
       .add("Header", () => <Header time="12pm" />)
       .add("Empty", () => <Empty onAdd={action("onAdd")} />)
       .add("Show", () => (
