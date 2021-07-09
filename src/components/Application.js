@@ -32,6 +32,10 @@ export default function Application(props) {
       ...state,
       appointments
     });
+
+    const putURL = "http://localhost:8001/api/appointments" ;
+
+    return axios.put(`${putURL}/${id}`, appointment)
   }
 
   const interviewers = getInterviewersForDay(state, state.day);
