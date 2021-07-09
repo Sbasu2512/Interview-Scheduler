@@ -15,7 +15,7 @@ export default function Application(props) {
     appointments: {}
   });
 
-  function bookInterview(id, interview) {
+  async function bookInterview(id, interview) {
     console.log(id, interview);
 
     const appointment = {
