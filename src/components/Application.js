@@ -15,12 +15,30 @@ export default function Application(props) {
     appointments: {}
   });
 
-  let interviewers = getInterviewersForDay(state, state.day);
+  function bookInterview(id, interview) {
+    console.log(id, interview);
+
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+
+    setState({
+      ...state,
+      appointments
+    });
+  }
+
+  const interviewers = getInterviewersForDay(state, state.day);
+  const dailyAppointments = getAppointmentsForDay(state, state.day) ;
 
   const setDay =  day => setState(prev => ({ ...prev, day }));
 
-  // let dailyAppointments = [] ;
-  let dailyAppointments = getAppointmentsForDay(state, state.day) ;
 
   useEffect(() => {
     Promise.all([
@@ -37,9 +55,10 @@ export default function Application(props) {
   const parsedAppointments = dailyAppointments.map((appointment) => 
     {
       const interview = getInterview(state, appointment.interview)
+      //this is where we are passing function as props
       return (
-      <Appointment key={appointment.id} {...appointment} interview={interview} interviewers={interviewers} />
-)
+      <Appointment key={appointment.id} {...appointment} interview={interview} interviewers={interviewers} bookInterview={bookInterview} />
+      )
     })
     
   return (
