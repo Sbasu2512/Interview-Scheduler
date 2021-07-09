@@ -48,13 +48,15 @@ export default function Application(props) {
   const deleteInterview = (id) => {
     const appointment = {
       ...state.appointments[id],
-      interview: { ...null }
+      interview: null 
     };
 
     const appointments = {
       ...state.appointments,
       [id]: appointment
     };
+
+
 
     const putURL = "http://localhost:8001/api/appointments" ;
     return new Promise((resolve, reject)=> {
@@ -79,7 +81,6 @@ export default function Application(props) {
   const dailyAppointments = getAppointmentsForDay(state, state.day) ;
 
   const setDay =  day => setState(prev => ({ ...prev, day }));
-
 
   useEffect(() => {
     Promise.all([
