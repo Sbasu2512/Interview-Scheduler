@@ -15,8 +15,9 @@ export default function Application(props) {
     appointments: {}
   });
 
-  async function bookInterview(id, interview) {
-    console.log(id, interview);
+   function bookInterview(id, interview) {
+    // console.log(id, interview);
+    const putURL = "http://localhost:8001/api/appointments" ;
 
     const appointment = {
       ...state.appointments[id],
@@ -28,15 +29,51 @@ export default function Application(props) {
       [id]: appointment
     };
 
-    setState({
-      ...state,
-      appointments
-    });
+    return new Promise ((resolve,reject) => {
+      return axios.put(`${putURL}/${id}`, appointment)
+      .then((response) => {
+                              setState({
+                                ...state,
+                                appointments
+                              });
+                              resolve(response)
+      }).catch((err)=> {
+        reject(err);
+      })
+    })
+    
+
+  }
+
+  const deleteInterview = (id) => {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...null }
+    };
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
 
     const putURL = "http://localhost:8001/api/appointments" ;
+    return new Promise((resolve, reject)=> {
+      return axios.delete(`${putURL}/${id}`)
+      .then((response) => {
+        setState({
+          ...state,
+          appointments
+        });
+        resolve(response);
+      })
+      .catch((e) => {
+        reject(e)
+      })
+    }) 
 
-    return axios.put(`${putURL}/${id}`, appointment)
-  }
+
+
+  };
 
   const interviewers = getInterviewersForDay(state, state.day);
   const dailyAppointments = getAppointmentsForDay(state, state.day) ;
@@ -61,7 +98,7 @@ export default function Application(props) {
       const interview = getInterview(state, appointment.interview)
       //this is where we are passing function as props
       return (
-      <Appointment key={appointment.id} {...appointment} interview={interview} interviewers={interviewers} bookInterview={bookInterview} />
+      <Appointment key={appointment.id} {...appointment} interview={interview} interviewers={interviewers} bookInterview={bookInterview} deleteInterview={deleteInterview} />
       )
     })
     

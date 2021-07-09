@@ -62,7 +62,7 @@ export default function Appointment(props) {
 
     if (mode === CONFIRM) {
       transition(DELETING, true)
-      props.cancelInterview(props.id)
+      props.deleteInterview(props.id)
       .then(() => transition(EMPTY))
       .catch(() => transition(ERROR_DELETE, true))
     } else {
@@ -96,7 +96,9 @@ export default function Appointment(props) {
           // onChange = {setInterviewer}
         />}
         {mode === SAVING && <Status message="Saving" />}
+        {mode === ERROR_SAVE && <Error message="Could not save appointment." onClose={e => back()}/>}
       {mode === DELETING && <Status message="Deleting" />}
+      {mode === ERROR_DELETE && <Error message="Could not delete appointment." onClose={e => back()}/>}
       {mode === CONFIRM && 
         <Confirm 
           onCancel={back}
