@@ -3,9 +3,9 @@ import  { useState, useEffect } from "react";
 import "components/Application.scss";
 import DayList     from "./daylist";
 import Appointment from "./Appointment";
-import getAppointmentsForDay from "helper/selector";
-import getInterview from 'helper/selector'
-import getInterviewersForDay from 'helper/selector'
+import { getInterviewersForDay, getInterview, getAppointmentsForDay} from "helper/selector";
+// import {getInterview} from 'helper/selector'
+// import {getInterviewersForDay} from 'helper/selector'
 const axios = require('axios');
 
 export default function Application(props) {
@@ -15,10 +15,11 @@ export default function Application(props) {
     appointments: {}
   });
 
-  const interviewers = getInterviewersForDay(state, state.day);
+  let interviewers = getInterviewersForDay(state, state.day);
 
   const setDay =  day => setState(prev => ({ ...prev, day }));
 
+  // let dailyAppointments = [] ;
   let dailyAppointments = getAppointmentsForDay(state, state.day) ;
 
   useEffect(() => {

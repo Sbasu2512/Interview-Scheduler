@@ -1,5 +1,5 @@
 //... returns an array of appointments for that day
-function getAppointmentsForDay (state, day) {
+export function getAppointmentsForDay(state, day)  {
   let appointments ;
   for(const dayObj of state.days) 
   {
@@ -19,7 +19,7 @@ function getAppointmentsForDay (state, day) {
   return dayAppointments;
 }
 
-function getInterview(state, interview) {
+export function getInterview (state, interview) {
   if (!interview) {
     return null;
   }
@@ -36,17 +36,16 @@ const matchIds = (appointments, ids) => {
   const matched = ids.map(id => appointments[id]);
   return matched;
 }
-
-function getInterviewersForDay(state, day) {
+export function getInterviewersForDay  (state, day) {
 
   let interviewersArr = [];
   // eslint-disable-next-line
-  state.days.map(dayObject => {
-    if (dayObject.name === day) {
-      dayObject.interviewers.forEach(interviewerId => interviewersArr.push(interviewerId))
+  state.days.map(dayObj => {
+    if (dayObj.name === day) {
+      dayObj.interviewers.forEach(interviewerId => interviewersArr.push(interviewerId))
     }
   })
   return matchIds(state.interviewers, interviewersArr);
 }
 
-export default {getAppointmentsForDay, getInterview, getInterviewersForDay, matchIds}
+// module.exports =  {getAppointmentsForDay, getInterview, getInterviewersForDay, matchIds} ;

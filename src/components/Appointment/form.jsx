@@ -6,7 +6,7 @@ import InterviewerList from "components/InterviewerList.jsx";
 export default function Form(props) {
 
   console.log(props);
-  const [name,setName] = useState(props.value || null)
+  const [name,setName] = useState(props.name || '')
   const [interviewer, setInterviewer] = useState(props.value || null);
   
   //Add a reset() function to the Form component that calls setName("") and setInterviewer(null).
