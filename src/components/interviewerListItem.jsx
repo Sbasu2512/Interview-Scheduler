@@ -9,8 +9,6 @@ export default function interviewListItem(props) {
     "interviewers__item--selected" : props.selected,
   });
 
-
-
   return (
     <li 
       id = {props.id}
@@ -22,7 +20,7 @@ export default function interviewListItem(props) {
       src={props.avatar}
       alt={props.name}
     />
-    { props.selected &&  props.name} 
+    { props.selected &&  props.name } 
     
     </li>
   );

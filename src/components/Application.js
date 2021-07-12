@@ -7,21 +7,27 @@ import useApplicationData from "hooks/useApplicationData";
 
 export default function Application(props) {
   
-  const {state, setDay, bookInterview, deleteInterview} = useApplicationData();
-  
-  
-
+  const {state, setDay, bookInterview, deleteInterview, updateSpots} = useApplicationData();
   const interviewers = getInterviewersForDay(state, state.day);
   const dailyAppointments = getAppointmentsForDay(state, state.day) ;
 
-  const parsedAppointments = dailyAppointments.map((appointment) => 
-    {
-      const interview = getInterview(state, appointment.interview)
-      //this is where we are passing function as props
-      return (
-      <Appointment key={appointment.id} {...appointment} interview={interview} interviewers={interviewers} bookInterview={bookInterview} deleteInterview={deleteInterview} />
-      )
-    })
+  const parsedAppointments = dailyAppointments.map((appointment) => {
+    const interview = getInterview(state, appointment.interview);
+    //this is where we are passing function as props
+    return (
+      <Appointment
+        key={appointment.id}
+        {...appointment}
+        interview={interview}
+        interviewers={interviewers}
+        bookInterview={bookInterview}
+        deleteInterview={deleteInterview}
+        applicationState={state}
+        applicationStateDay={state.day}
+        updateSpots={updateSpots}
+      />
+    );
+  });
     
   return (
     <main className="layout">
