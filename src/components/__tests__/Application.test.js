@@ -1,6 +1,6 @@
 import React from "react";
 
-import { render, cleanup, waitForElement, fireEvent,  prettyDOM, getByText, getAllByTestId, getByPlaceholderText, getByAltText  } from "@testing-library/react";
+import { render, cleanup, waitForElement, fireEvent,  prettyDOM, getByText, getAllByTestId, getByPlaceholderText, getByAltText, queryByText  } from "@testing-library/react";
 
 import Application from "components/Application";
 
@@ -90,7 +90,7 @@ describe("Test suite for Application component", () => {
     * */
    async () => {
      //1: Render the Application.
-     const { container } = render(<Application />);
+     const { container, debug } = render(<Application />);
      //  2: Wait until the text "Archie Cohen" is displayed.
      await waitForElement(() => getByText(container ,"Archie Cohen"));
      
@@ -109,13 +109,22 @@ describe("Test suite for Application component", () => {
       fireEvent.click(getByAltText(appointment, "Sylvia Palmer"));
       // 6: Click the "Save" button on that same appointment.
       fireEvent.click(getByText(appointment, "Save"));
+      //
+      expect(getByText(appointment, "Saving")).toBeInTheDocument();
       // 7: Check that the element with the text "Saving" is displayed.
       expect(getByText(appointment, "Saving")).toBeInTheDocument();
       // 8: Wait until the element with the text "Lydia Miller-Jones" is displayed.
       await waitForElement(() => getByText(appointment, "Lydia Miller-Jones"));
+      //check if we are displaying student name right after saving
+      expect((getByText(appointment, "Lydia Miller-Jones"))).toBeInTheDocument() ;
       // 9: Check that the DayListItem with the text "Monday" also has the text "no spots remaining". 
       expect(getByText(container, "Monday")).toBeInTheDocument();
       expect(getByText(container, "no spots remaining")).toBeInTheDocument();
+
+      const day = getAllByTestId(container, "day").find(day =>
+        queryByText(day, "Monday")
+      );
+      expect(getByText(day, "no spots remaining")).toBeInTheDocument();
     });
     
   });
