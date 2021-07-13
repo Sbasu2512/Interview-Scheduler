@@ -33,14 +33,14 @@ describe("Form", () => {
     );
     expect(getByTestId("student-name-input")).toHaveValue("Lydia Miller-Jones");
   });
-
+//test#3 ===> !!!
   it("validates that the student name is not blank", () => {
     /* 1. Create the mock onSave function */
     const onSave = jest.fn();
 
     /* 2. Render the Form with interviewers and the onSave mock function passed as an onSave prop, the name prop should be blank or undefined */
     const { getByText } = render(
-      <Form interviewers={interviewers} onSave={onSave} name= "name" />
+      <Form interviewers={interviewers} onSave={onSave}  />
     );
 
     /* 3. Click the save button */
@@ -52,8 +52,6 @@ describe("Form", () => {
   
   it("calls onSave function when the name is defined", () => {
       /* 1. Create the mock onSave function */
-
-      
       const onSave = jest.fn();
       const { getByText, getByPlaceholderText, queryByText } = render(
         /* 2. Render the Form with interviewers, name and the onSave mock function passed as an onSave prop */
@@ -81,4 +79,20 @@ describe("Form", () => {
     /* 5. onSave is called with the correct arguments */
     expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", null);
   });
+
+  it("submits the name entered by the user", () => {
+    const onSave = jest.fn();
+    const { getByText, getByPlaceholderText } = render(
+      <Form interviewers={interviewers} onSave={onSave} />
+    );
+    
+    const input = getByPlaceholderText("Enter Student Name");
+  
+    fireEvent.change(input, { target: { value: "Lydia Miller-Jones" } });
+    fireEvent.click(getByText("Save"));
+  
+    expect(onSave).toHaveBeenCalledTimes(1);
+    expect(onSave).toHaveBeenCalledWith("Lydia Miller-Jones", null);
+  });
+
 });

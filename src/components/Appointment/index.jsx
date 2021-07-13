@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect } from 'react';
 //local imports
 import './styles.scss';
 import Header from "components/Appointment/header";
