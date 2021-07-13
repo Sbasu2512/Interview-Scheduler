@@ -10,13 +10,14 @@ export default function Form(props) {
   const [interviewer, setInterviewer] = useState(props.value || null);
   const [error, setError] = useState("");
 
-  function inputOnChangeHandler(event) {
-    setName(event.target.value);
-  }
+  // function inputOnChangeHandler(event) {
+  //   setName(event.target.value);
+  //   validate();
+  // }
 
-  useEffect(() => {
-    validate()
-  },[name])
+  // useEffect(() => {
+  //   validate()
+  // },[name])
 
   //Create a function called validate in the body of the Form component.
    function validate() {
@@ -56,7 +57,8 @@ export default function Form(props) {
         name="name"
         type="text"
         placeholder="Enter Student Name"
-        onChange = {(event) =>inputOnChangeHandler(event)} //grabbing value from the input area
+        onChange={(event) => setName(event.target.value)}
+        // onChange = {(event) =>inputOnChangeHandler(event)} //grabbing value from the input area
         value={name}
         data-testid="student-name-input"
         
@@ -68,7 +70,7 @@ export default function Form(props) {
   <section className="appointment__card-right">
     <section className="appointment__actions">
       <Button danger onClick={cancel}>Cancel</Button>
-      <Button confirm onClick={() => inputOnChangeHandler()} >Save</Button>
+      <Button confirm onClick={() => validate()} >Save</Button>
     </section>
   </section>
 </main>
