@@ -2,7 +2,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import InterviewerListItem from "./InterviewerListItem";
-import "components/InterviewerList.scss"
+import "./InterviewerList.scss"
 
 function interviewerList(props) {
    const Interviewers = 

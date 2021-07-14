@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
-import Button from "components/Button";
-import InterviewerList from "components/InterviewerList.jsx";
+import Button from "../Button";
+import InterviewerList from "../InterviewerList.jsx";
 
 
 export default function Form(props) {

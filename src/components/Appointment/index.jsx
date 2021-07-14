@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
 //local imports
 import './styles.scss';
-import Header from "components/Appointment/header";
-import Empty from "components/Appointment/Empty";
-import Show from "components/Appointment/show";
-import Form from 'components/Appointment/form';
-import Status from 'components/Appointment/status';
-import Confirm from 'components/Appointment/confirm';
-import Error from 'components/Appointment/Error';
+import Header from "./header";
+import Empty from "./Empty";
+import Show from "./show";
+import Form from './form';
+import Status from './status';
+import Confirm from './confirm';
+import Error from './Error';
 
-import 'components/Appointment/styles.scss';
-import useVisualMode from 'hooks/useVisualMode';
+import './styles.scss';
+import useVisualMode from '../../hooks/useVisualMode';
 
 
 
