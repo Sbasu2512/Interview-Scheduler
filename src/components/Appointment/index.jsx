@@ -89,9 +89,9 @@ export default function Appointment(props) {
           // onChange = {setInterviewer}
         />}
         {mode === SAVING && <Status message="Saving" />}
-        {mode === ERROR_SAVE && <Error message="Could not save appointment." onClose={e => back()}/>}
+        {mode === ERROR_SAVE && <Error message="Could not save appointment" onClose={e => back()}/>}
       {mode === DELETING && <Status message="Deleting"/>}
-      {mode === ERROR_DELETE && <Error message="Could not delete appointment." onClose={e => back()}/>}
+      {mode === ERROR_DELETE && <Error message="Could not delete appointment" onClose={e => back()}/>}
       {mode === CONFIRM && 
         <Confirm 
           onCancel={e => back()}

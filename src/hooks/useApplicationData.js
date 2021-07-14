@@ -8,7 +8,7 @@ export default function useApplicationData(props) {
     days: [],
     appointments: {},
   });
-  
+
   const setDay = (day) => setState((prev) => ({ ...prev, day }));
 
   useEffect(() => {
@@ -26,28 +26,21 @@ export default function useApplicationData(props) {
       }));
     });
   }, []);
+ 
   //update spots function
-  const updateSpots = function (apointmentId, action) {
+  const updateSpots = function (appointmentId, appointments) {
     let appointmentCounter = 0;
-    const freeDays = state.days.find(day => day.appointments.includes(apointmentId));
+    const matchingDay = state.days.find(day => day.appointments.includes(appointmentId));
     // count the number of appointments booked in previous state
-    freeDays.appointments.forEach(appointment => {
-      if (state.appointments[appointment].interview === null) {
+    matchingDay.appointments.forEach(appointment => {
+      if (appointments[appointment].interview === null) {
         appointmentCounter += 1;
       }
     });
 
-    if(action === 'book'){
-      appointmentCounter -= 1;
-    }
-
-    if(action === 'cancel'){
-      appointmentCounter += 1 ;
-    }
-
     const updatedDayArr = state.days.map(day => {
-      if (day.name === freeDays.name) {
-        return {...freeDays, spots: appointmentCounter}
+      if (day.name === matchingDay.name) {
+        return {...matchingDay, spots: appointmentCounter}
       }
       return day;
     });
@@ -56,7 +49,8 @@ export default function useApplicationData(props) {
 }    
 
   function bookInterview(id, interview) {
-    // console.log(id, interview);
+    console.log("Book interview");
+
     const putURL = "http://localhost:8001/api/appointments";
     const appointment = {
       ...state.appointments[id],
@@ -70,7 +64,7 @@ export default function useApplicationData(props) {
       return axios
         .put(`${putURL}/${id}`, appointment)
         .then((response) => {
-          const updatedSpotsArr = updateSpots(id, "book");
+          const updatedSpotsArr = updateSpots(id,  appointments);
           setState({
             ...state,
             appointments,
@@ -99,7 +93,7 @@ export default function useApplicationData(props) {
       return axios
         .delete(`${putURL}/${id}`)
         .then((response) => {
-          const updatedSpotsArr = updateSpots(id, "cancel");
+          const updatedSpotsArr = updateSpots(id, appointments);
           setState({
             ...state,
             appointments,
