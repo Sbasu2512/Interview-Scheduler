@@ -1,8 +1,7 @@
-import  React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function useApplicationData(props) {
-  //state
+export default function useApplicationData() {
   const [state, setState] = useState({
     day: "Monday",
     days: [],
@@ -17,7 +16,6 @@ export default function useApplicationData(props) {
       axios.get("/api/appointments"),
       axios.get("/api/interviewers"),
     ]).then((all) => {
-      // set your states here with the correct values...
       setState((prev) => ({
         ...prev,
         days: all[0].data,
@@ -26,27 +24,29 @@ export default function useApplicationData(props) {
       }));
     });
   }, []);
- 
+
   //update spots function
   const updateSpots = function (appointmentId, appointments) {
     let appointmentCounter = 0;
-    const matchingDay = state.days.find(day => day.appointments.includes(appointmentId));
+    const matchingDay = state.days.find((day) =>
+      day.appointments.includes(appointmentId)
+    );
     // count the number of appointments booked in previous state
-    matchingDay.appointments.forEach(appointment => {
+    matchingDay.appointments.forEach((appointment) => {
       if (appointments[appointment].interview === null) {
         appointmentCounter += 1;
       }
     });
 
-    const updatedDayArr = state.days.map(day => {
+    const updatedDayArr = state.days.map((day) => {
       if (day.name === matchingDay.name) {
-        return {...matchingDay, spots: appointmentCounter}
+        return { ...matchingDay, spots: appointmentCounter };
       }
       return day;
     });
 
     return updatedDayArr;
-}    
+  };
 
   function bookInterview(id, interview) {
     console.log("Book interview");
@@ -64,11 +64,11 @@ export default function useApplicationData(props) {
       return axios
         .put(`${putURL}/${id}`, appointment)
         .then((response) => {
-          const updatedSpotsArr = updateSpots(id,  appointments);
+          const updatedSpotsArr = updateSpots(id, appointments);
           setState({
             ...state,
             appointments,
-            days: updatedSpotsArr
+            days: updatedSpotsArr,
           });
           resolve(response);
         })
@@ -97,7 +97,7 @@ export default function useApplicationData(props) {
           setState({
             ...state,
             appointments,
-            days: updatedSpotsArr
+            days: updatedSpotsArr,
           });
           resolve(response);
         })
@@ -106,8 +106,5 @@ export default function useApplicationData(props) {
         });
     });
   };
-
-
-
   return { state, setDay, bookInterview, deleteInterview, updateSpots };
 }
