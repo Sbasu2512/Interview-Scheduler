@@ -1,19 +1,22 @@
 import React from "react";
-import './Application.scss';
+import "./Application.scss";
 import DayList from "./daylist";
 import Appointment from "./Appointment";
-import { getInterviewersForDay, getInterview, getAppointmentsForDay} from "../helper/selector";
+import {
+  getInterviewersForDay,
+  getInterview,
+  getAppointmentsForDay,
+} from "../helper/selector";
 import useApplicationData from "../hooks/useApplicationData";
 
-export default function Application(props) {
-  
-  const {state, setDay, bookInterview, deleteInterview, updateSpots} = useApplicationData();
+export default function Application() {
+  const { state, setDay, bookInterview, deleteInterview, updateSpots } =
+    useApplicationData();
   const interviewers = getInterviewersForDay(state, state.day);
-  const dailyAppointments = getAppointmentsForDay(state, state.day) ;
+  const dailyAppointments = getAppointmentsForDay(state, state.day);
 
   const parsedAppointments = dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
-    //this is where we are passing function as props
     return (
       <Appointment
         key={appointment.id}
@@ -28,7 +31,7 @@ export default function Application(props) {
       />
     );
   });
-    
+
   return (
     <main className="layout">
       <section className="sidebar">
@@ -39,11 +42,7 @@ export default function Application(props) {
         />
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
-          <DayList                    //props  
-            days={state.days}
-            day={state.day}
-            setDay={setDay}
-          />
+          <DayList days={state.days} day={state.day} setDay={setDay} />
         </nav>
         <img
           className="sidebar__lhl sidebar--centered"
@@ -51,12 +50,7 @@ export default function Application(props) {
           alt="Lighthouse Labs"
         />
       </section>
-      <section className="schedule">
-        {parsedAppointments}
-      </section>
+      <section className="schedule">{parsedAppointments}</section>
     </main>
-  );   
-
-  };
-
-  
+  );
+}
