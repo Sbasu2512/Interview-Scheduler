@@ -38,3 +38,15 @@ npm run storybook
 ## Screenshots
 
 !["Landing Page"](https://github.com/Sbasu2512/Interview-Scheduler/blob/9fb32fd538b3090bf351259d5b961af4a746a54b/Screenshots/interview_Scheduler.png)
+
+!["Booking an interview](https://github.com/Sbasu2512/Interview-Scheduler/blob/9fb32fd538b3090bf351259d5b961af4a746a54b/Screenshots/Book_interview.png)
+
+!["Saving in Progress"](https://github.com/Sbasu2512/Interview-Scheduler/blob/9fb32fd538b3090bf351259d5b961af4a746a54b/Screenshots/Save_interview.png)
+
+!["Interview Booked"](https://github.com/Sbasu2512/Interview-Scheduler/blob/9fb32fd538b3090bf351259d5b961af4a746a54b/Screenshots/interview_booked.png)
+
+!["Delete Interview"](https://github.com/Sbasu2512/Interview-Scheduler/blob/9fb32fd538b3090bf351259d5b961af4a746a54b/Screenshots/Delete_interview.png)
+
+!["Delete in progress"](https://github.com/Sbasu2512/Interview-Scheduler/blob/9fb32fd538b3090bf351259d5b961af4a746a54b/Screenshots/Delete_in_progress.png)
+
+!["Edit an interview"](https://github.com/Sbasu2512/Interview-Scheduler/blob/9fb32fd538b3090bf351259d5b961af4a746a54b/Screenshots/Edit_Interview.png)
