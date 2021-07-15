@@ -11,7 +11,6 @@ export function getAppointmentsForDay(state, day)  {
   if(!appointments) {
     return [] ;
   }
-  // get appointment info for corresponding id in appointments array
   let dayAppointments = [];
   for (const appointment of appointments) {
     dayAppointments.push({ ...state.appointments[appointment] });
@@ -30,14 +29,13 @@ export function getInterview (state, interview) {
     interviewer: interviewerInfo
   }
 }
-
 //Go through an appointments object and return an array pf all the nested objects with that id
 const matchIds = (appointments, ids) => {
   const matched = ids.map(id => appointments[id]);
   return matched;
 }
-export function getInterviewersForDay  (state, day) {
 
+export function getInterviewersForDay  (state, day) {
   let interviewersArr = [];
   // eslint-disable-next-line
   state.days.map(dayObj => {
@@ -47,5 +45,3 @@ export function getInterviewersForDay  (state, day) {
   })
   return matchIds(state.interviewers, interviewersArr);
 }
-
-// module.exports =  {getAppointmentsForDay, getInterview, getInterviewersForDay, matchIds} ;
