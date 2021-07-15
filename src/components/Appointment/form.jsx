@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Button from "../Button";
 import InterviewerList from "../InterviewerList.jsx";
 
 export default function Form(props) {
-  //states
   const [name, setName] = useState(props.name || "");
   const [interviewer, setInterviewer] = useState(props.value || null);
   const [error, setError] = useState("");
 
-  //Create a function called validate in the body of the Form component.
   function validate() {
     if (!name) {
       setError("student name cannot be blank");
@@ -17,13 +15,11 @@ export default function Form(props) {
     setError("");
     save();
   }
-  //Add a reset() function to the Form component that calls setName("") and setInterviewer(null).
   const reset = function () {
     setName("");
     setInterviewer(null);
   };
 
-  //Add a cancel function to the Form component that calls reset() and props.onCancel. We should also update our Form component so it's called when a user clicks the Cancel button.
   const cancel = function () {
     reset();
     props.onCancel();

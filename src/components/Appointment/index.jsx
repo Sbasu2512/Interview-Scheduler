@@ -36,7 +36,6 @@ export default function Appointment(props) {
     }
   }, [mode, transition, props.interview]);
 
-  //save the interview
   function save(name, interviewer) {
     const interview = {
       student: name,
@@ -51,7 +50,6 @@ export default function Appointment(props) {
         .catch(() => transition(ERROR_SAVE, true));
     }
   }
-  //delete the interview
   function remove() {
     transition(DELETING, true);
     props
@@ -81,7 +79,6 @@ export default function Appointment(props) {
           onCancel={(e) => back()}
           onEdit={props.onEdit}
           onDelete={() => transition(CONFIRM)}
-          // onChange = {setInterviewer}
         />
       )}
       {mode === SAVING && <Status message="Saving" />}
