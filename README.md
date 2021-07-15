@@ -37,7 +37,7 @@ npm run storybook
 
 ## Screenshots
 
-!["Landing Page"](https://github.com/Sbasu2512/Interview-Scheduler/blob/9fb32fd538b3090bf351259d5b961af4a746a54b/Screenshots/interview_Scheduler.png)
+![" Landing Page "](https://github.com/Sbasu2512/Interview-Scheduler/blob/9fb32fd538b3090bf351259d5b961af4a746a54b/Screenshots/interview_Scheduler.png)
 
 !["Booking an interview](https://github.com/Sbasu2512/Interview-Scheduler/blob/9fb32fd538b3090bf351259d5b961af4a746a54b/Screenshots/Book_interview.png)
 
