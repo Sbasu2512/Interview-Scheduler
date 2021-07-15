@@ -1,22 +1,23 @@
-
 import React from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import InterviewerListItem from "./InterviewerListItem";
-import "./InterviewerList.scss"
+import "./InterviewerList.scss";
 
 function interviewerList(props) {
-   const Interviewers = 
-   Array.isArray(props.interviewers) && 
-   props.interviewers.map(function(data, index) {
-     return (<InterviewerListItem
-      key={data.id}
-      name = {data.name}
-      avatar = {data.avatar}
-      selected = {data.id === props.value}
-      setInterviewer={event => props.onChange(data.id)}
-      />) ;
+  const Interviewers =
+    Array.isArray(props.interviewers) &&
+    props.interviewers.map(function (data) {
+      return (
+        <InterviewerListItem
+          key={data.id}
+          name={data.name}
+          avatar={data.avatar}
+          selected={data.id === props.value}
+          setInterviewer={() => props.onChange(data.id)}
+        />
+      );
     });
-    
+
   return (
     <section className="interviewers">
       <h4 className="interviewers__header text--light">Interviewers</h4>
@@ -26,7 +27,7 @@ function interviewerList(props) {
 }
 
 interviewerList.propTypes = {
-  interviewers: PropTypes.array.isRequired
+  interviewers: PropTypes.array.isRequired,
 };
 
 export default interviewerList;
