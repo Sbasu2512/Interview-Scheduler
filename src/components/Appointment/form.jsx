@@ -4,20 +4,10 @@ import InterviewerList from "../InterviewerList.jsx";
 
 
 export default function Form(props) {
-  // console.log('props are ________',props);
 
   const [name,setName] = useState(props.name || '')
   const [interviewer, setInterviewer] = useState(props.value || null);
   const [error, setError] = useState("");
-
-  // function inputOnChangeHandler(event) {
-  //   setName(event.target.value);
-  //   validate();
-  // }
-
-  // useEffect(() => {
-  //   validate()
-  // },[name])
 
   //Create a function called validate in the body of the Form component.
    function validate() {
@@ -50,15 +40,12 @@ export default function Form(props) {
   <section className="appointment__card-left">
     <form autoComplete="off" onSubmit={event => event.preventDefault()}>
       <input
-      /*
-        This must be a controlled component
-      */
+      
         className="appointment__create-input text--semi-bold"
         name="name"
         type="text"
         placeholder="Enter Student Name"
         onChange={(event) => setName(event.target.value)}
-        // onChange = {(event) =>inputOnChangeHandler(event)} //grabbing value from the input area
         value={name}
         data-testid="student-name-input"
         
