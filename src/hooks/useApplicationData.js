@@ -9,12 +9,15 @@ export default function useApplicationData() {
   });
 
   const setDay = (day) => setState((prev) => ({ ...prev, day }));
+  const daysUrl = "/api/days";
+  const appointmentsUrl = "/api/appointments" ;
+  const interviewersUrl = "/api/interviewers" ;
 
   useEffect(() => {
     Promise.all([
-      axios.get("/api/days"),
-      axios.get("/api/appointments"),
-      axios.get("/api/interviewers"),
+      axios.get(daysUrl),
+      axios.get(appointmentsUrl),
+      axios.get(interviewersUrl),
     ]).then((all) => {
       setState((prev) => ({
         ...prev,
@@ -25,13 +28,13 @@ export default function useApplicationData() {
     });
   }, []);
 
-  //update spots function
+  //* update spots function
   const updateSpots = function (appointmentId, appointments) {
     let appointmentCounter = 0;
     const matchingDay = state.days.find((day) =>
       day.appointments.includes(appointmentId)
     );
-    // count the number of appointments booked in previous state
+    //TODO: count the number of appointments booked in previous state
     matchingDay.appointments.forEach((appointment) => {
       if (appointments[appointment].interview === null) {
         appointmentCounter += 1;
@@ -52,6 +55,7 @@ export default function useApplicationData() {
     console.log("Book interview");
 
     const putURL = "http://localhost:8001/api/appointments";
+    const updatedAppointmentsUrl = `${putURL}/${id}` ;
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview },
@@ -62,7 +66,7 @@ export default function useApplicationData() {
     };
     return new Promise((resolve, reject) => {
       return axios
-        .put(`${putURL}/${id}`, appointment)
+        .put(updatedAppointmentsUrl, appointment)
         .then((response) => {
           const updatedSpotsArr = updateSpots(id, appointments);
           setState({
@@ -89,9 +93,10 @@ export default function useApplicationData() {
     };
 
     const putURL = "http://localhost:8001/api/appointments";
+    const deleteUrl = `${putURL}/${id}` ;
     return new Promise((resolve, reject) => {
       return axios
-        .delete(`${putURL}/${id}`)
+        .delete(deleteUrl)
         .then((response) => {
           const updatedSpotsArr = updateSpots(id, appointments);
           setState({
