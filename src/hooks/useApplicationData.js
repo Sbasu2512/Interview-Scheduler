@@ -54,8 +54,6 @@ export default function useApplicationData() {
   function bookInterview(id, interview) {
     console.log("Book interview");
 
-    const putURL = "http://localhost:8001/api/appointments";
-    const updatedAppointmentsUrl = `${putURL}/${id}` ;
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview },
@@ -66,7 +64,7 @@ export default function useApplicationData() {
     };
     return new Promise((resolve, reject) => {
       return axios
-        .put(updatedAppointmentsUrl, appointment)
+        .put(`/api/appointments/${id}`, appointment)
         .then((response) => {
           const updatedSpotsArr = updateSpots(id, appointments);
           setState({
@@ -92,8 +90,7 @@ export default function useApplicationData() {
       [id]: appointment,
     };
 
-    const putURL = "http://localhost:8001/api/appointments";
-    const deleteUrl = `${putURL}/${id}` ;
+    const deleteUrl = `/api/appointments/${id}` ;
     return new Promise((resolve, reject) => {
       return axios
         .delete(deleteUrl)
