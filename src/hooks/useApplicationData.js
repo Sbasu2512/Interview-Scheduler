@@ -8,16 +8,14 @@ export default function useApplicationData() {
     appointments: {},
   });
 
-  const setDay = (day) => setState((prev) => ({ ...prev, day }));
-  const daysUrl = "/api/days";
-  const appointmentsUrl = "/api/appointments" ;
-  const interviewersUrl = "/api/interviewers" ;
+  // const setDay = day => setState((prev) => ({ ...prev, day }));
+  const setDay = day => setState({...state, day});
 
   useEffect(() => {
     Promise.all([
-      axios.get(daysUrl),
-      axios.get(appointmentsUrl),
-      axios.get(interviewersUrl),
+      axios.get("/api/days"),
+      axios.get("/api/appointments"),
+      axios.get("/api/interviewers"),
     ]).then((all) => {
       setState((prev) => ({
         ...prev,
@@ -28,13 +26,13 @@ export default function useApplicationData() {
     });
   }, []);
 
-  //* update spots function
+  //update spots function
   const updateSpots = function (appointmentId, appointments) {
     let appointmentCounter = 0;
     const matchingDay = state.days.find((day) =>
       day.appointments.includes(appointmentId)
     );
-    //TODO: count the number of appointments booked in previous state
+    // count the number of appointments booked in previous state
     matchingDay.appointments.forEach((appointment) => {
       if (appointments[appointment].interview === null) {
         appointmentCounter += 1;
@@ -47,13 +45,11 @@ export default function useApplicationData() {
       }
       return day;
     });
-
     return updatedDayArr;
   };
 
   function bookInterview(id, interview) {
-    console.log("Book interview");
-
+    const putURL = "/api/appointments";
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview },
@@ -64,7 +60,7 @@ export default function useApplicationData() {
     };
     return new Promise((resolve, reject) => {
       return axios
-        .put(`/api/appointments/${id}`, appointment)
+        .put(`${putURL}/${id}`, appointment)
         .then((response) => {
           const updatedSpotsArr = updateSpots(id, appointments);
           setState({
@@ -79,21 +75,20 @@ export default function useApplicationData() {
         });
     });
   }
+
   const deleteInterview = (id) => {
     const appointment = {
       ...state.appointments[id],
       interview: null,
     };
-
     const appointments = {
       ...state.appointments,
       [id]: appointment,
     };
-
-    const deleteUrl = `/api/appointments/${id}` ;
+    const putURL = "/api/appointments";
     return new Promise((resolve, reject) => {
       return axios
-        .delete(deleteUrl)
+        .delete(`${putURL}/${id}`)
         .then((response) => {
           const updatedSpotsArr = updateSpots(id, appointments);
           setState({

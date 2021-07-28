@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import "./styles.scss";
 import Header from "./header";
 import Empty from "./Empty";
-import Show from "./show";
+import Show from './show'
 import Form from "./form";
 import Status from "./status";
 import Confirm from "./confirm";
@@ -35,7 +35,7 @@ export default function Appointment(props) {
       transition(EMPTY);
     }
   }, [mode, transition, props.interview]);
-
+  //* Save the interview
   function save(name, interviewer) {
     const interview = {
       student: name,
@@ -50,6 +50,7 @@ export default function Appointment(props) {
         .catch(() => transition(ERROR_SAVE, true));
     }
   }
+  //* delete the interview
   function remove() {
     transition(DELETING, true);
     props
