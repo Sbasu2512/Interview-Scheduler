@@ -23,6 +23,11 @@ npm test
 ```sh
 npm run storybook
 ```
+
+## Running Scheduler-api server
+
+This application also needs scheduler api to as well. Here is a [link](https://github.com/Sbasu2512/scheduler-api) to the github repository for further instructions on how to set it up
+
 ## Dependencies
 
     babel/core 7.x or above,
