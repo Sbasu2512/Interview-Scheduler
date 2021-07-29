@@ -3,12 +3,6 @@ import { useState, useEffect } from "react";
 const useVisualMode = (initial) => {
   const [mode, setMode] = useState(initial);
   const [history, setHistory] = useState([initial]);
-/**setPerson(prevPerson => {
-    return { 
-      ...prevPerson, 
-      age: prevPerson.age + 1 
-    }
-  }) */
 
   useEffect(() => {
     setMode(history[history.length - 1]);
@@ -17,9 +11,9 @@ const useVisualMode = (initial) => {
 
 
   const transition = (newMode, replace = false) => {
-    setMode(newMode);
     if (!replace) {
-      setHistory(prevHistory => [...prevHistory, newMode]);
+      setMode(newMode);
+      history.push(newMode)
     } else {
       setMode(newMode);
     }
@@ -27,7 +21,8 @@ const useVisualMode = (initial) => {
 
   const back = () => {
     if (history.length > 1) {
-      setHistory(prevHistory => prevHistory.pop()) ;
+      history.pop();
+      setMode(history[history.length - 1]);
     }
   };
 
