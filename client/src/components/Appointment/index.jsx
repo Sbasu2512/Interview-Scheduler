@@ -41,7 +41,7 @@ export default function Appointment(props) {
       student: name,
       interviewer,
     };
-
+    console.log(interview);
     if (name && interviewer) {
       transition(SAVING);
       props
