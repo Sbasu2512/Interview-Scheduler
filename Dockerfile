@@ -3,37 +3,36 @@ FROM node:20-alpine AS client-build
 
 WORKDIR /app/client
 
-# Install client dependencies
 COPY client/package*.json ./
 RUN npm install
 
-# Copy client source
 COPY client ./
-
-# Build production React app
 RUN npm run build
 
 
-# ---------- Stage 2: Build API ----------
+# ---------- Stage 2: Final Image ----------
 FROM node:20-alpine
+
+# Install git (needed for submodules)
+RUN apk add --no-cache git
 
 WORKDIR /app
 
+# Copy entire repo (including .git)
+COPY . .
+
+# Initialize submodules
+RUN git submodule update --init --recursive
+
 # Install API dependencies
-COPY scheduler-api/package*.json ./scheduler-api/
-RUN cd scheduler-api && npm install
-
-# Copy API source
-COPY scheduler-api ./scheduler-api
-
-# Copy built React files into API folder
-COPY --from=client-build /app/client/build ./client/build
-
-# Set working directory to API
 WORKDIR /app/scheduler-api
+RUN npm install
 
-# Expose Render port (Render injects PORT env variable)
+# Copy built React files into API
+COPY --from=client-build /app/client/build /app/client/build
+
+# Expose port
 EXPOSE 8001
 
-# Start API
+# Start server
 CMD ["npm", "start"]
