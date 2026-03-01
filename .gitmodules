@@ -1,0 +1,3 @@
+[submodule "scheduler-api"]
+	path = scheduler-api
+	url = git@github.com:Sbasu2512/scheduler-api.git

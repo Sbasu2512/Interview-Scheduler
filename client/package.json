@@ -1,0 +1,55 @@
+{
+  "name": "scheduler",
+  "version": "0.1.0",
+  "private": true,
+  "proxy": "http://localhost:8001",
+  "dependencies": {
+    "axios": "^1.7.2",
+    "classnames": "^2.5.1",
+    "normalize.css": "^8.0.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-scripts": "5.0.1"
+  },
+  "scripts": {
+    "local": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "storybook": "storybook dev -p 9009 -s public --ci",
+    "build-storybook": "storybook build -s public",
+    "cypress": "cypress open -P ."
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.24.7",
+    "@babel/eslint-parser": "^7.28.6",
+    "@storybook/addon-actions": "^8.1.11",
+    "@storybook/addon-backgrounds": "^8.1.11",
+    "@storybook/addon-links": "^8.1.11",
+    "@storybook/react": "^8.1.11",
+    "@testing-library/jest-dom": "^6.4.6",
+    "@testing-library/react": "^16.0.0",
+    "cypress": "^13.12.0",
+    "prop-types": "^15.8.1",
+    "sass": "^1.77.6",
+    "storybook": "^8.1.11"
+  },
+  "jest": {
+    "watchPathIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/.git/"
+    ]
+  }
+}
